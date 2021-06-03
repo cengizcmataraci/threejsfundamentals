@@ -18,86 +18,43 @@ bilgisayara `"Hello World!"` yazısını yazdırmaktır.
 3D için ise en yaygın olarak yapılan ilk şeylerden biri 3D bir küp yapmaktır.
 Öyleyse gelin "Hello Cube!" ile başlayalım!
 
-Before we get started let's try to give you an idea of the structure
-of a three.js app. A three.js app requires you to create a bunch of
-objects and connect them together. Here's a diagram that represents
-a small three.js app
+Başlamadan önce three.js uygulamasının mimarisi hakkında fikir vermeye çalışalım. Bir three.js uygulaması birçok objelerin oluşturulmasına ve onların birbirine bağlanmasına ihtiyaç duyar. Burada küçük bir three.js uygulamasını temsil eden bir diyagram var.
 
 <div class="threejs_center"><img src="resources/images/threejs-structure.svg" style="width: 768px;"></div>
 
-Things to notice about the diagram above.
+Yukarıdaki şema hakkında dikkat edilmesi gerekenler.
 
-* There is a `Renderer`. This is arguably the main object of three.js. You pass a
-  `Scene` and a `Camera` to a `Renderer` and it renders (draws) the portion of
-  the 3D scene that is inside the *frustum* of the camera as a 2D image to a
-  canvas.
+- Burada bir `Renderer` var. Bu tartışmalı bir şekilde three.js'nin ana nesnesidir. `Renderer`'a bir `Scene` ve bir `Camera` iletilir ve 3 boyutlu sahnenin kameranın kesik kısmı içindeki kısmını bir 2 boyutlu görüntü olarak tuvale işler (çizer).
 
-* There is a [scenegraph](threejs-scenegraph.html) which is a tree like
-  structure, consisting of various objects like a `Scene` object, multiple
-  `Mesh` objects, `Light` objects, `Group`, `Object3D`, and `Camera` objects. A
-  `Scene` object defines the root of the scenegraph and contains properties like
-  the background color and fog. These objects define a hierarchical parent/child
-  tree like structure and represent where objects appear and how they are
-  oriented. Children are positioned and oriented relative to their parent. For
-  example the wheels on a car might be children of the car so that moving and
-  orienting the car's object automatically moves the wheels. You can read more
-  about this in [the article on scenegraphs](threejs-scenegraph.html).
+- Bir `Scene` nesnesi, `Mesh` nesneleri, `Light` nesneleri, `Group`, `Object3D` ve `Camera` objeleri gibi çeşitli nesnelerden oluşan, ağaç benzeri bir yapı gibi bir [sahne grafiği](threejs-scenegraph.html) vardır. Bir `Scene` objesi arkaplan rengi ve sis gibi özellikler içerir ve sahne grafiğinin kökünü tanımlar. Bu nesneler hiyerarşik bir üst/alt ağaç benzeri yapı tanımlar ve nesnelerin nerede göründüğünü ve nasıl yönlendirildiklerini temsil eder. Altlar (çocuklar) üstlerine (ebeveynlerine) göre konumlandırılır ve yönlendirilir. Örneğin; arabanın tekerleri arabanın çocuğu olabilir, böylece araba nesnesini hareket ettirmek ve yönlendirmek, tekerlekleri otomatik olarak hareket ettirir. Daha fazlası için sahne grafiği ile alakalı [buradaki](threejs-scenegraph.html) makaleyi okuyabilirsiniz.
 
-  Note in the diagram `Camera` is half in half out of the scenegraph. This is to
-  represent that in three.js, unlike the other objects, a `Camera` does not have
-  to be in the scenegraph to function. Just like other objects, a `Camera`, as a
-  child of some other object, will move and orient relative to its parent object.
-  There is an example of putting multiple `Camera` objects in a scenegraph at
-  the end of [the article on scenegraphs](threejs-scenegraph.html).
+  Şemadaki notta `Camera` sahne grafiğinin yarı yarıya dışarısındadır. Bu three.js'te, diğer nesnelerin aksine, bir `Camera`'nın çalışması için sahne grafiğinde olması gerekmez. Aynı diğer objeler gibi, bir `Camera`, başka bir nesnenin çocuğu olarak, ebeveyn nesnesine hareket edecek ve yönlendirilecektir. [Burada](threejs-scenegraph.html) sahne grafikleri ile ilgili makalenin sonunda bir sahne grafiğine birden fazla `Camera` nesnesi yerleştirme örneği vardır.
 
-* `Mesh` objects represent drawing a specific `Geometry` with a specific
-   `Material`. Both `Material` objects and `Geometry` objects can be used by
-   multiple `Mesh` objects. For example to draw two blue cubes in different
-   locations we could need two `Mesh` objects to represent the position and
-   orientation of each cube. We would only need one `Geometry` to hold the vertex
-   data for a cube and we would only need one `Material` to specify the color
-   blue. Both `Mesh` objects could reference the same `Geometry` object and the
-   same `Material` object.
+- `Mesh` nesneleri spesifik bir `Geometry`'i spesifik bir `Material` ile çizmeyi temsil eder. Hem `Material` hem de `Geometry` objeleri birden çok `Mesh` nesneleri tarafından kullanılabilir. Örneğin; farklı konumlardaki iki mavi kübü çizmek için her iki kübün konum ve yönünü temsil eden iki `Mesh` nesnesine ihtiyacımız vardır. Küpün tepe noktası verilerini tutmak için yalnızca bir `Geometry`'e ve mavi rengi belirmek için sadece bir `Material`'a ihtiyacımız olacaktı. Her iki `Mesh` nesnesi aynı `Geometry` nesnesi ve aynı `Material` nesnesini referans eder.
 
-* `Geometry` objects represent the vertex data of some piece of geometry like
-   a sphere, cube, plane, dog, cat, human, tree, building, etc...
-   Three.js provides many kinds of built in
-   [geometry primitives](threejs-primitives.html). You can also
-   [create custom geometry](threejs-custom-buffergeometry.html) as well as
-   [load geometry from files](threejs-load-obj.html).
+- `Geometry` nesneleri küre, küp, uçak, köpek, kedi, insan, ağaç, bina gibi bazı geometri parçalarının tepe noktası verilerini temsil eder. Three.js birçok türde yerleşik [geometri ilkelleri](threejs-primitives.html) sağlar. Ayrıca [dosyalardan geometri yükleyebileceğiniz](threejs-load-obj.html) gibi [özel geometri](threejs-custom-buffergeometry.html) de oluşturabilirsiniz.
 
-* `Material` objects represent
-  [the surface properties used to draw geometry](threejs-materials.html)
-  including things like the color to use and how shiny it is. A `Material` can also
-  reference one or more `Texture` objects which can be used, for example,
-  to wrap an image onto the surface of a geometry.
+- `Material` nesneleri ne kadar parlak olacağını belirleyen renk gibi şeyleri içeren [geometri çizerken kullanılan yüzey özellikleri](threejs-materials.html)ni temsil eder. Bir `Material` ayrıca bir ya da birden fazla kullanılan `Texture` nesnesini referans edebilir, örneğin; bir görüntüyü bir geometrinin yüzeyine sarmak için.
 
-* `Texture` objects generally represent images either [loaded from image files](threejs-textures.html),
-  [generated from a canvas](threejs-canvas-textures.html) or [rendered from another scene](threejs-rendertargets.html).
+- `Texture` nesneleri genellikle ya [resim dosyalarından yüklenen resimleri](threejs-textures.html), [tuvalden oluşturulan](threejs-canvas-textures.html) ya da [başka bir sahneden işlenen](threejs-rendertargets.html) resimleri temsil eder.
 
-* `Light` objects represent [different kinds of lights](threejs-lights.html).
+- `Light` nesneleri [farklı ışık türleri](threejs-lights.html)ni temsil eder.
 
-Given all of that we're going to make the smallest *"Hello Cube"* setup
-that looks like this
+Tüm bunları göz önüne alarak en küçük _"Hello Cube"_ kurulumunu yapacağız ki tam olarak şuna benziyor:
 
 <div class="threejs_center"><img src="resources/images/threejs-1cube-no-light-scene.svg" style="width: 500px;"></div>
 
-First let's load three.js
+İlk olarak three.js'i yükleyelim!
 
 ```html
 <script type="module">
-import * as THREE from './resources/threejs/r125/build/three.module.js';
+  import * as THREE from "./resources/threejs/r125/build/three.module.js";
 </script>
 ```
 
-It's important you put `type="module"` in the script tag. This enables
-us to use the `import` keyword to load three.js. There are other ways
-to load three.js but as of r106 using modules is the recommended way.
-Modules have the advantage that they can easily import other modules
-they need. That saves us from having to manually load extra scripts
-they are dependent on.
+Script etiketine `type="module"`'ü koymanız önemlidir. Bu bize three.js'i yüklerken `import`'u kullanabilmemizi sağlar. Three.js'i yüklemek için başka yollar da vardır ama r106'dan itibaren modülleri kullanmak önerilen yoldur. Modüller ihtiyacı olan diğer modülleri kolayca içeri aktarmayı sağlayan bir avantaja sahiptir. Bu bizi fazladan manuel olarak bağımlı olan ekstra script dosyalarını yüklemekten kurtarıyor.
 
-Next we need is a `<canvas>` tag so...
+Sırada bir `<canvas>` etiketine ihtiyacımız var, yani...
 
 ```html
 <body>
@@ -105,16 +62,16 @@ Next we need is a `<canvas>` tag so...
 </body>
 ```
 
-We will ask three.js to draw into that canvas so we need to look it up.
+Three.js'den bu tuvali çizmesini isteyeceğiz, bu yüzden ona bir göz atmamız gerekiyor.
 
 ```html
 <script type="module">
-import * as THREE from './resources/threejs/r125/build/three.module.js';
+  import * as THREE from './resources/threejs/r125/build/three.module.js';
 
-+function main() {
-+  const canvas = document.querySelector('#c');
-+  const renderer = new THREE.WebGLRenderer({canvas});
-+  ...
+  +function main() {
+  +  const canvas = document.querySelector('#c');
+  +  const renderer = new THREE.WebGLRenderer({canvas});
+  +  ...
 </script>
 ```
 
@@ -138,7 +95,7 @@ Next up we need a camera. We'll create a `PerspectiveCamera`.
 
 ```js
 const fov = 75;
-const aspect = 2;  // the canvas default
+const aspect = 2; // the canvas default
 const near = 0.1;
 const far = 5;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
@@ -150,13 +107,13 @@ reason the perspective camera takes degrees.
 
 `aspect` is the display aspect of the canvas. We'll go over the details
 [in another article](threejs-responsive.html) but by default a canvas is
- 300x150 pixels which makes the aspect 300/150 or 2.
+300x150 pixels which makes the aspect 300/150 or 2.
 
 `near` and `far` represent the space in front of the camera
 that will be rendered. Anything before that range or after that range
 will be clipped (not drawn).
 
-Those four settings define a *"frustum"*. A *frustum* is the name of
+Those four settings define a _"frustum"_. A _frustum_ is the name of
 a 3d shape that is like a pyramid with the tip sliced off. In other
 words think of the word "frustum" as another 3D shape like sphere,
 cube, prism, frustum.
@@ -211,7 +168,7 @@ We then create a basic material and set its color. Colors can
 be specified using standard CSS style 6 digit hex color values.
 
 ```js
-const material = new THREE.MeshBasicMaterial({color: 0x44aa88});
+const material = new THREE.MeshBasicMaterial({ color: 0x44aa88 });
 ```
 
 We then create a `Mesh`. A `Mesh` in three represents the combination
@@ -254,7 +211,7 @@ Here's our loop
 
 ```js
 function render(time) {
-  time *= 0.001;  // convert time to seconds
+  time *= 0.001; // convert time to seconds
 
   cube.rotation.x = time;
   cube.rotation.y = time;
@@ -294,7 +251,7 @@ three.js which we'll go over in [a future article](threejs-lights.html). For now
 
 ```js
 {
-  const color = 0xFFFFFF;
+  const color = 0xffffff;
   const intensity = 1;
   const light = new THREE.DirectionalLight(color, intensity);
   light.position.set(-1, 2, 4);
@@ -337,7 +294,7 @@ sets its X position.
 
 ```js
 function makeInstance(geometry, color, x) {
-  const material = new THREE.MeshPhongMaterial({color});
+  const material = new THREE.MeshPhongMaterial({ color });
 
   const cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
@@ -353,9 +310,9 @@ saving the `Mesh` instances in an array.
 
 ```js
 const cubes = [
-  makeInstance(geometry, 0x44aa88,  0),
+  makeInstance(geometry, 0x44aa88, 0),
   makeInstance(geometry, 0x8844aa, -2),
-  makeInstance(geometry, 0xaa8844,  2),
+  makeInstance(geometry, 0xaa8844, 2),
 ];
 ```
 
@@ -412,6 +369,7 @@ import * as THREE from './resources/threejs/r125/build/three.module.js';
 ...
 
 &lt;/script&gt;
+
 </pre>
 <p>
 Paths must be absolute or relative. Relative paths always start with <code>./</code> or <code>../</code>
@@ -479,5 +437,6 @@ to support legacy browsers look into a <a href="https://babeljs.io">transpiler</
 </div>
 
 <!-- needed in English only to prevent warning from outdated translations -->
+
 <a href="threejs-geometry.html"></a>
 <a href="Geometry"></a>
