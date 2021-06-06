@@ -93,18 +93,11 @@ const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
 `fov` `field of view` (görüş alanı)'nın kısaltmasıdır. Bu örnekte dikeyde 75 derece boyutta. Three.js'deki açıların çoğunun radyan cinsinden olduğuna dikkat edin, fakat bazı sebeplerden ötürü perspektif kamera derece alır.
 
-`aspect` is the display aspect of the canvas. We'll go over the details
-[in another article](threejs-responsive.html) but by default a canvas is
-300x150 pixels which makes the aspect 300/150 or 2.
+`aspect` tuvalin görüntü yönüdür. Bu konunun detaylarını [başka bir makalede](threejs-responsive.html) irdeleyeceğiz ama varsayılan olarak bir tuval 300x150 pikseldir bu da görünümü 300/150 ya da 2 yapar.
 
-`near` and `far` represent the space in front of the camera
-that will be rendered. Anything before that range or after that range
-will be clipped (not drawn).
+`near` ve `far` oluşturulacak görüntüde kameranın önündeki boşluğu temsil eder. Bu aralıktan önce veya sonra herhangi bir şey kırpılır (çizilmez).
 
-Those four settings define a _"frustum"_. A _frustum_ is the name of
-a 3d shape that is like a pyramid with the tip sliced off. In other
-words think of the word "frustum" as another 3D shape like sphere,
-cube, prism, frustum.
+Buradaki dört ayar bir _"fustum"_ tanımlar. Bir _frustum_ ucu kesilmiş bir piramit gibi bir 3 boyutlu şeklin adıdır. Diğer bir deyişle "frustum" kelimesi küre, küp, prizma, frustum gibi başka bir 3 boyutlu şeklin yerine kullanılabilir.
 
 <img src="resources/frustum-3d.svg" width="500" class="threejs_center"/>
 
