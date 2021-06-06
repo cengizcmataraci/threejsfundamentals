@@ -75,23 +75,13 @@ Three.js'den bu tuvali çizmesini isteyeceğiz, bu yüzden ona bir göz atmamız
 </script>
 ```
 
-After we look up the canvas we create a `WebGLRenderer`. The renderer
-is the thing responsible for actually taking all the data you provide
-and rendering it to the canvas. In the past there have been other renderers
-like `CSSRenderer`, a `CanvasRenderer` and in the future there may be a
-`WebGL2Renderer` or `WebGPURenderer`. For now there's the `WebGLRenderer`
-that uses WebGL to render 3D to the canvas.
+Tuvale göz attıktan sonra bir `WebGLRenderer` oluşturuyoruz. Oluşturucu tuvalin oluşturulmasında ve sağladığınız tüm verilerin alınmasında asıl sorumlu olan şeydir. Geçmişte `CSSRenderer`, `CanvasRenderer` gibi diğer oluşturucular vardı ve gelecekte belki de `WebGL2Renderer` ya da `WebGPURenderer` gibileri olabilir. Şimdilik tuvalde 3 boyutlu oluşturmak için WebGL'i kullanan `WebGLRenderer` var.
 
-Note there are some esoteric details here. If you don't pass a canvas
-into three.js it will create one for you but then you have to add it
-to your document. Where to add it may change depending on your use case
-and you'll have to change your code so I find that passing a canvas
-to three.js feels a little more flexible. I can put the canvas anywhere
-and the code will find it whereas if I had code to insert the canvas
-into to the document I'd likely have to change that code if my use case
-changed.
+Burada bazı ezoterik (belirli bir insan topluluğunun dışında kimseye bildirilmeyen, yalnızca sınırlı, dar bir çevreye aktarılan her türlü bilgi) ayrıntılar olduğuna dikkat edin. Eğer bir tuvali three.js'e geçirmezseniz sizin için bir tane oluşturur fakat sonrasında belgenize eklemeniz gerekir. Nereye ekleyeceğiniz kullanım durumunuza bağlı olarak değişebilir ve kodunuzu değiştirmeniz gerekecektir, böylece bir tuval geçirirken three.js daha esnek hissettiriyor.
 
 Next up we need a camera. We'll create a `PerspectiveCamera`.
+
+Sırada bir kameraya ihtiyacımız var. Bir `PerspectiveCamera` oluşturacağız.
 
 ```js
 const fov = 75;
@@ -101,9 +91,7 @@ const far = 5;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 ```
 
-`fov` is short for `field of view`. In this case 75 degrees in the vertical
-dimension. Note that most angles in three.js are in radians but for some
-reason the perspective camera takes degrees.
+`fov` `field of view` (görüş alanı)'nın kısaltmasıdır. Bu örnekte dikeyde 75 derece boyutta. Three.js'deki açıların çoğunun radyan cinsinden olduğuna dikkat edin, fakat bazı sebeplerden ötürü perspektif kamera derece alır.
 
 `aspect` is the display aspect of the canvas. We'll go over the details
 [in another article](threejs-responsive.html) but by default a canvas is
