@@ -112,20 +112,18 @@ Kamera varsayılan olarak +Y yukarı ile -Z aşağı eksenine bakar. Kübümüz�
 camera.position.z = 2;
 ```
 
-Here's what we're aiming for.
+İşte hedeflediğimiz şey.
+
 
 <img src="resources/scene-down.svg" width="500" class="threejs_center"/>
 
-In the diagram above we can see our camera is at `z = 2`. It's looking
-down the -Z axis. Our frustum starts 0.1 units from the front of the camera
-and goes to 5 units in front of the camera. Because in this diagram we are looking down,
-the field of view is affected by the aspect. Our canvas is twice as wide
-as it is tall so across the canvas the field of view will be much wider than
-our specified 75 degrees which is the vertical field of view.
+Yukarıdaki şemada kameramızın `z = 2`'de olduğunu görebiliriz. -Z eksenine bakıyoruz. Frustumumuz kameranın önünde 0.1 birim başlıyor ve kamera önünde 5 birim gidiyor. Çünkü bu şemada aşağı bakıyoruz, görüş alanı açıdan etkilenir. Tuvalimiz boyundan iki kat daha geniştir, bu nedenle tuval boyunca görüş alanı, dikey görüş alanı olarak söylediğimiz 75 dereceden çok daha geniş olacaktır.
 
 Next we make a `Scene`. A `Scene` in three.js is the root of a form of scene graph.
 Anything you want three.js to draw needs to be added to the scene. We'll
 cover more details of [how scenes work in a future article](threejs-scenegraph.html).
+
+Sırada bir `Scene` yapalım. Bir `Scene` Three.js'de sahne grafiği formundaki köklerden biridir. Three.js'in çizmesini istediğiniz herhangi bir şey sahneye eklenmelidir. Bu konunun detaylarını [sahnelerin nasıl çalıştığı ile alakalı ileriki makale](threejs-scenegraph.html)lerden birinde göreceğiz.
 
 ```js
 const scene = new THREE.Scene();
