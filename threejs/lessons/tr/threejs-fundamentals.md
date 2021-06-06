@@ -97,19 +97,16 @@ const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
 `near` ve `far` oluşturulacak görüntüde kameranın önündeki boşluğu temsil eder. Bu aralıktan önce veya sonra herhangi bir şey kırpılır (çizilmez).
 
-Buradaki dört ayar bir _"fustum"_ tanımlar. Bir _frustum_ ucu kesilmiş bir piramit gibi bir 3 boyutlu şeklin adıdır. Diğer bir deyişle "frustum" kelimesi küre, küp, prizma, frustum gibi başka bir 3 boyutlu şeklin yerine kullanılabilir.
+Buradaki dört ayar bir _"frustum"_ tanımlar. Bir _frustum_ ucu kesilmiş bir piramit gibi bir 3 boyutlu şeklin adıdır. Diğer bir deyişle "frustum" kelimesi küre, küp, prizma, frustum gibi başka bir 3 boyutlu şeklin yerine kullanılabilir.
 
 <img src="resources/frustum-3d.svg" width="500" class="threejs_center"/>
 
-The height of the near and far planes are determined by the field of view.
-The width of both planes is determined by the field of view and the aspect.
+Yakın ve uzak düzlemlerin yüksekliği görüş alanı tarafından belirlenir.
+Her iki yüzeylerin genişliği görüş alanı ve yönüne göre belirlenir.
 
-Anything inside the defined frustum will be be drawn. Anything outside
-will not.
+Tanımlanan frustum içindeki herhangi bir şey çizilecektir. Dışarıdaki herhangi bir şey ise çizilmeyecektir.
 
-The camera defaults to looking down the -Z axis with +Y up. We'll put our cube
-at the origin so we need to move the camera back a little from the origin
-in order to see anything.
+Kamera varsayılan olarak +Y yukarı ile -Z aşağı eksenine bakar. Kübümüzü orjine koyacağız, bu yüzden bir şey görebilmek için kamerayı başlangıç noktasından biraz geriye çekmemiz gerekiyor.
 
 ```js
 camera.position.z = 2;
